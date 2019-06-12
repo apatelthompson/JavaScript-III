@@ -81,6 +81,29 @@
     return `${this.name} offers a greeting in ${this.language}.`
   }
 
+// this will be: Hero, the great-grandchild
+  function Hero(greatgrandchildAttributes) {
+    GameObject.call(this, greatgrandchildAttributes);
+    CharacterStats.call(this, greatgrandchildAttributes);
+    Humanoid.call(this, greatgrandchildAttributes)
+    this.smoothMove = greatgrandchildAttributes.smoothMove;
+    this.perservere = function () {
+      return `I will use my ${this.smoothMove} to end you and bring victory to ${this.team}!`
+    }
+  }
+
+// this will be: Villain, the great-grandchild
+  function Villain(greatgrandchildAttributes) {
+    GameObject.call(this, greatgrandchildAttributes);
+    CharacterStats.call(this, greatgrandchildAttributes);
+    Humanoid.call(this, greatgrandchildAttributes);
+    this.sneakyMove = greatgrandchildAttributes.sneakyMove;
+    this.powerMove = function () {
+      return `${this.name} never gives up! This ${this.weapons} will end you!`
+    }
+}
+
+
 
   const mage = new Humanoid({
     createdAt: new Date(),
@@ -113,6 +136,7 @@
       'Shield',
     ],
     language: 'Common Tongue',
+    smoothMove: "Hiyah"
   });
 
   const archer = new Humanoid({
@@ -132,6 +156,45 @@
     language: 'Elvish',
   });
 
+  const heroHannah = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 5,
+      width: 3,
+      height: 1,
+    },
+    healthPoints: 25,
+    name: 'Hannah',
+    team: 'The Round Table',
+    weapons: [
+      'Giant Sword',
+      'Shield',
+    ],
+    language: 'Common Tongue',
+    smoothMove: "Hiyah"
+  });
+
+  const villainVince = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 7,
+      width: 4,
+      height: 4,
+    },
+    healthPoints: 10,
+    name: 'Vince',
+    team: 'The Baddies',
+    weapons: [
+      'Giant Nunchuck',
+    ],
+    language: 'Common Tongue',
+    sneakyMove: "Karate Chop"
+  });
+
+
+
+
+
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -142,9 +205,12 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-
+  console.log(heroHannah.smoothMove);
+  console.log(heroHannah.perservere());
+  console.log(villainVince.sneakyMove);
+  console.log(villainVince.powerMove());
 
   // Stretch task:
-  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
+  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function. DONE
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
-  // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  // * Create two new objects, one a villain and one a hero and fight it out with methods! DONE
