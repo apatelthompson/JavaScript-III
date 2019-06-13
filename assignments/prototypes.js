@@ -45,28 +45,32 @@
     this.createdAt = attributes.createdAt;
     this.name = attributes.name;
     this.dimensions = attributes.dimensions;
-    this.destroy = function() {
-      return `${this.name} was removed from the game.`
-    }
+    // this.destroy = function() {
+      // return `${this.name} was removed from the game.`
+    // }
   }
 
-//   GameObject.prototype.destroy = function() {
-//     return `${this.name} was removed from the game.`
-// }
+  GameObject.prototype.destroy = function() {
+    return `${this.name} was removed from the game.`
+}
 
 
 // this will be: CharacterStats, the child
   function CharacterStats(childAttributes) {
     GameObject.call(this, childAttributes);
     this.healthPoints = childAttributes.healthPoints;
-    this.takeDamage = function () {
-      return `${this.name} took damage.`
-    }
+    // this.takeDamage = function () {
+    //   return `${this.name} took damage.`
+    // }
   }
 
-  // CharacterStats.prototype.takeDamage = function() {
-  //     return `${this.name} took damage.`
-  // }
+  CharacterStats.prototype = Object.create(GameObject.prototype);
+
+  CharacterStats.prototype.takeDamage = function() {
+      return `${this.name} took damage.`
+  }
+
+
 
 // this will be: Humanoid, the grandchild
   function Humanoid(grandchildAttributes) {
@@ -77,6 +81,8 @@
     this.language = grandchildAttributes.language;
   }
 
+  Humanoid.prototype = Object.create(CharacterStats.prototype);
+  
   Humanoid.prototype.greet = function() {
     return `${this.name} offers a greeting in ${this.language}.`
   }
